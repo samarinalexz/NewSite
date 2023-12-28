@@ -15,5 +15,5 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.TagPostList.as_view(), name='tag'),
     path('edit/<slug:slug>/', views.UpdatePage.as_view(), name='edit_page'),
     path('delete/<slug:slug>/', views.DeletePage.as_view(), name='delete_page'),
-    path('<slug:slug>/', views.post_detail, name='post_detail')
+    path('<slug:slug>/', views.post_detail, name='comment')
 ]

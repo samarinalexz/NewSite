@@ -123,8 +123,9 @@ class TagPostList(DataMixin, ListView):
     def get_queryset(self):
         return Board.published.filter(tags__slug=self.kwargs['tag_slug']).select_related('cat')
 
-def post_detail(request, slug):
-    template_name = 'post_detail.html'
+
+def comment(request, slug):
+    template_name = 'board/post.html'
     post = get_object_or_404(Board, slug=slug)
     comments = post.comments.filter(active=True)
     new_comment = None    # Comment posted

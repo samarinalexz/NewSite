@@ -25,32 +25,21 @@
                             Отправить
                         </button></p>
                     </form>
-        {% for comment in board.comment_set.all %}
-                    <h5>
-                        {{ comment.name }}
-                    </h5>
+{% with comments.count as total_comments %}
+<h2>{{ total_comments }} Отклики</h2>
                     <p>
-                        {{ comment.text }}
+                   {% endwith %} {% for comment in comments %}
                     </p>
-                    {#                    <div class="media mt-5 editContent"#}
-                    {#                         style="outline: none; cursor: inherit;">#}
-                    {#                        <a class="pr-3" href="#">#}
-                    {#                            <img src="bundles/images/te1.jpg" class="img-fluid " alt="image">#}
-                    {#                        </a>#}
-                    {#                        <div class="media-body">#}
-                    {#                            <h5 class="mt-0 editContent"#}
-                    {#                                style="outline: none; cursor: inherit;">Leia Organa</h5>#}
-                    {#                            <p class="mt-2 editContent"#}
-                    {#                               style="outline: none; cursor: inherit;"> Cras sit amet#}
-                    {#                                nibh libero, in gravida nulla. Nulla vel metus#}
-                    {#                                scelerisque ante sollicitudin. Cras purus odio,#}
-                    {#                                vestibulum in vulputate at, tempus viverra turpis. Fusce#}
-                    {#                                condimentum nunc ac nisi vulputate fringilla..</p>#}
-                    {#                        </div>#}
-                    {#                    </div>#}
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    </div>
+                        <div class="comments" style="padding: 10px;">
+                            <p class="font-weight-bold">
+                                {{ comment.name }}
+                                <span class=" text-muted font-weight-normal">
+                                    {{ comment.created_on }}
+                                </span>
+                            </p>
+                            {{ comment.body | linebreaks }}
+                        </div>
+
+                    {% endfor %}
+
 {% endblock %}

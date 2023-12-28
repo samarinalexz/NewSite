@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+{% if post.author == request.user %}
+<p><a href="{% url 'edit_page' post.slug %}">Редактировать</a></p>
+{% endif %}
+
+<!-- Teги -->
+{% with post.tags.all as tags %}
+{% if tags %}
+<ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in tags %}
+    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+
+{% if post.upload %}
+<p><object class="object-article-left" data="{{post.upload.url}}"></object></p>
+{% endif %}
+{% if post.img %}
+<img src="{{post.img.url}}">
+{% endif %}
+		<h5>
+			Комментарии
+		</h5>
+		{% include 'board/comment_list.html' %}
+	</div>
+</div>
+{{post.content|linebreaks}}
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block breadcrumbs %}
+<!-- Teги -->
+{% with post.tags.all as tags %}
+{% if tags %}
+<ul class="tags-list">
+    <li>Теги:</li>
+    {% for t in tags %}
+    <li><a href="{{t.get_absolute_url}}">{{t.tag}}</a> </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+<h1>{{post.title}}</h1>
+
+{% if post.upload %}
+<p><object class="object-article-left" data="{{post.upload.url}}"></object></p>
+{% endif %}
+
+{{post.content|linebreaks}}
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    {{ form }}
+    <input type="submit" value="Confirm">
+</form>
+{% endblock %}
